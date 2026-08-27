@@ -2,6 +2,7 @@
 
 ## Overview
 This PowerShell script audits Microsoft Authenticator App registration status for members of a security group in Microsoft Entra ID. It generates a comprehensive CSV report showing which users have the Microsoft Authenticator authentication method registered.
+Script: https://github.com/matthewrstreeter/entra/blob/main/AuthMethods-AuthAppRegistrationStatus.ps1
 
 ## Purpose
 - Identify users in a security group who have registered Microsoft Authenticator
