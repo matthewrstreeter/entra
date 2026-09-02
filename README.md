@@ -6,6 +6,7 @@ This folder contains PowerShell scripts related to Microsoft Entra ID (formerly 
 
 - [EnterpriseApps-GetSamlConfigs.ps1](#enterpriseapps-getsamlconfigsps1)
 - [AuthMethods-AuthAppRegistrationStatus.ps1](#authmethods-authappregistrationstatusps1)
+- [AuthMethods-SecurityQuestionsRegistration.ps1](#authmethods-securityquestionsregistrationps1)
 - [PIM-EligibleRolesActivateRoles.ps1](#pim-eligiblerolesactivaterolesps1)
 
 ---
@@ -42,6 +43,34 @@ Checks the registration status of the Microsoft Authenticator app as an authenti
 
 **Usage:**
 - Run the script with the required parameters to generate a report on authenticator registration status.
+
+---
+
+### AuthMethods-SecurityQuestionsRegistration.ps1
+
+Checks whether users listed in an input CSV have registered Security Questions as an authentication method in Microsoft Entra ID. The script looks up users by Employee ID first, falls back to first and last name matching, queries Microsoft Graph registration details, and records unmatched users.
+
+**Prerequisites:**
+- PowerShell 7 or Windows PowerShell
+- Microsoft Graph PowerShell SDK with `Connect-MgGraph`, `Get-MgUser`, and `Get-MgReportAuthenticationMethodUserRegistrationDetail` available
+- Microsoft Graph permissions: `User.Read.All` and `AuditLog.Read.All`
+- An input CSV with `Employee ID`, `First Name`, and `Last Name` columns
+- Existing input and output directories configured in the script
+
+**Configuration:**
+- Update `$csvInputPath`, `$csvOutputPath`, and `$summaryOutputPath` in the script before running it.
+
+**Usage:**
+```powershell
+.\AuthMethods-SecurityQuestionsRegistration.ps1
+```
+
+The script exports a detailed CSV report and a text summary. The CSV includes the employee ID, match method, display name, user principal name, and whether Security Questions are registered. Rows that cannot be matched are reported as `Not Found`.
+
+**User Matching:**
+1. Match `Employee ID` against `onPremisesSamAccountName`.
+2. If no match is found, match `First Name` and `Last Name` against `givenName` and `surname`.
+3. Record the user as `Not Found` if neither lookup succeeds.
 
 ---
 
