@@ -4,6 +4,7 @@ This folder contains PowerShell scripts related to Microsoft Entra ID (formerly 
 
 ## Table of Contents
 
+- [CA-ExportPolices_ResolveGuids.ps1](#ca-exportpolices_resolveguidps1)
 - [EnterpriseApps-GetSamlConfigs.ps1](#enterpriseapps-getsamlconfigsps1)
 - [AuthMethods-AuthAppRegistrationStatus.ps1](#authmethods-authappregistrationstatusps1)
 - [AuthMethods-SecurityQuestionsRegistration.ps1](#authmethods-securityquestionsregistrationps1)
@@ -12,6 +13,27 @@ This folder contains PowerShell scripts related to Microsoft Entra ID (formerly 
 ---
 
 <h2><u>Scripts</u></h2>
+
+### CA-ExportPolices_ResolveGuids.ps1
+
+Exports Microsoft Entra Conditional Access policies as individual JSON files and resolves referenced object IDs into human-readable names where possible. Original JSON exports are preserved, and the script also creates resolved JSON copies, a detailed assignments CSV, and a policy summary CSV.
+
+**Prerequisites:**
+- Microsoft.Graph.Authentication module
+- Microsoft.Graph.Identity.SignIns module
+- Delegated Microsoft Graph permissions: Policy.Read.All, Directory.Read.All, Application.Read.All
+
+**Parameters:**
+- `OutputFolder`: The output directory (default: `./Temp/CAPolicies`)
+
+**Usage:**
+```powershell
+.\Entra\CA-ExportPolices_ResolveGuids.ps1
+```
+
+Use `-OutputFolder` to choose a different output directory. The output includes `Original/` and `Resolved/` JSON folders, `ConditionalAccessPolicy-ResolvedAssignments.csv`, and `ConditionalAccessPolicy-PolicySummary.csv`.
+
+---
 
 ### EnterpriseApps-GetSamlConfigs.ps1
 
