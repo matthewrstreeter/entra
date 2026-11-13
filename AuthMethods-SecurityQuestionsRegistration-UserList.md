@@ -2,9 +2,9 @@
 
 This directory contains PowerShell scripts for reporting authentication method registration status in Microsoft Entra ID.
 
-## AuthMethods-SecurityQuestionsRegistration.ps1
+## AuthMethods-SecurityQuestionsRegistration-UserList.ps1
 
-`AuthMethods-SecurityQuestionsRegistration.ps1` checks whether users in an input CSV have registered **Security Questions** as an authentication method. It looks up each user in Entra ID, queries the Microsoft Graph authentication method registration details report, and writes both a detailed CSV report and a text summary.
+`AuthMethods-SecurityQuestionsRegistration-UserList.ps1` checks whether users in an input CSV have registered **Security Questions** as an authentication method. It looks up each user in Entra ID, queries the Microsoft Graph authentication method registration details report, and writes both a detailed CSV report and a text summary.
 
 ## Prerequisites
 
@@ -49,9 +49,9 @@ The script also accounts for a possible UTF-8 BOM or hidden characters in the `E
 Open the script and update these variables before running it:
 
 ```powershell
-$csvInputPath = "\\Path\\To\\Input\\UsersList.csv"
-$csvOutputPath = "\\Path\\To\\Output\\UsersList-SecurityQuestionsReport.csv"
-$summaryOutputPath = "\\Path\\To\\Output\\UsersList-SecurityQuestionsSummary.txt"
+$csvInputPath = "\Path\To\Input\UsersList.csv"
+$csvOutputPath = "\Path\To\Output\UsersList-SecurityQuestionsReport.csv"
+$summaryOutputPath = "\Path\To\Output\UsersList-SecurityQuestionsSummary.txt"
 ```
 
 The script does not create missing folders. Create the input and output directories first, and ensure the current account can read the input file and write the output files.
@@ -61,7 +61,7 @@ The script does not create missing folders. Create the input and output director
 From PowerShell, run:
 
 ```powershell
-.\\AuthMethods-SecurityQuestionsRegistration.ps1
+.\AuthMethods-SecurityQuestionsRegistration-UserList.ps1
 ```
 
 On first use, `Connect-MgGraph` opens an interactive sign-in flow. Complete authentication with an account that has the required permissions.
